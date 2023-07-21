@@ -1,70 +1,52 @@
 import Square from "./Square"
-import { useState } from "react";
 
-export default function Board() {
-
-
-    const [xIsNext, setXIsNext] = useState(true);
-    const [squares, setSquares] = useState(Array(9).fill(null));
-
+export default function Board({ xIsNext, squares, onPlay }) {
 
     function handleClick(i) {
-        if (squares[i] || calculateWinner(squares)) {
+        if (calculateWinner(squares) || squares[i]) {
             return;
         }
         const nextSquares = squares.slice();
         if (xIsNext) {
-            nextSquares[i] = "X";
+            nextSquares[i] = 'X';
         } else {
-            nextSquares[i] = "O";
+            nextSquares[i] = 'O';
         }
-        setSquares(nextSquares);
-        setXIsNext(!xIsNext);
+        onPlay(nextSquares);
     }
 
-    function handleReset() {
-        setSquares(Array(9).fill(null));
-    }
+    // function handleReset() {
+    //     setSquares(Array(9).fill(null));
+    // }
 
 
     const winner = calculateWinner(squares);
     let status;
     if (winner) {
-        status = `Winner ${winner}!`
+        status = 'Winner: ' + winner;
     } else {
-        status = `Your turn ${(xIsNext ? 'X' : 'O')}!`
+        status = 'Next player: ' + (xIsNext ? 'X' : 'O');
     }
 
 
 
     return (
-        <div
-            style={{
-                width: '500px',
-                height: '500px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '24px',
-            }}
-        >
-
-            <p style={{ marginBottom: '10px' }}>TicTacToe</p>
+        <div className="w-500 h-500 flex flex-col items-center justify-center text-2xl">
+            <p className="mb-4">TicTacToe</p>
             <p>{status}</p>
-            <button onClick={handleReset}>Reset</button>
+            {/* <button onClick={handleReset}>Reset</button> */}
 
-            <div className="row" >
+            <div className="flex mb-4">
                 <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
                 <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
                 <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
             </div>
-            <div className="row" >
+            <div className="flex mb-4">
                 <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
                 <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
                 <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
             </div>
-            <div className="row">
+            <div className="flex">
                 <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
                 <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
                 <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
