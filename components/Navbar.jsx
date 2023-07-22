@@ -5,7 +5,7 @@ export default function Navbar() {
         <div className="navbar bg-slate-100">
             <div className="flex justify-around">
                 <div>
-                    <a className="btn btn-ghost text-xl">My Website</a>
+                    <Link href="/" className="btn btn-ghost text-xl" >MyApp</Link>
                 </div>
                 <div className="flex justify-between">
                     <ul className="menu flex flex-row px-1">

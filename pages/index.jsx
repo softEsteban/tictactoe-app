@@ -1,21 +1,13 @@
-import Link from "next/link";
 import Game from "../components/Game";
 
 export default function Home() {
   return (
-    <div>
-      <h2>Home page</h2>
-
-      <Game />
-
-      <ul>
-        <li>
-          <Link href="/about">About Us</Link>
-        </li>
-        <li>
-          <Link href="/blog/hello-world">Blog Post</Link>
-        </li>
-      </ul>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="">
+        <h1 className="text-2xl md:text-4xl">Welcome to this game</h1>
+        <p className="text-lg md:text-xl">Play Tic Tac Toe</p>
+      </div>
+      <div className="md:order-1"><Game /></div>
     </div>
   );
 }

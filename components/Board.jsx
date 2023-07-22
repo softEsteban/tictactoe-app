@@ -1,6 +1,7 @@
 import Square from "./Square"
+import { BiReset } from 'react-icons/bi'
 
-export default function Board({ xIsNext, squares, onPlay }) {
+export default function Board({ xIsNext, squares, onPlay, onReset }) {
 
     function handleClick(i) {
         if (calculateWinner(squares) || squares[i]) {
@@ -15,10 +16,9 @@ export default function Board({ xIsNext, squares, onPlay }) {
         onPlay(nextSquares);
     }
 
-    // function handleReset() {
-    //     setSquares(Array(9).fill(null));
-    // }
-
+    function handleResetClick() {
+        onReset();
+    }
 
     const winner = calculateWinner(squares);
     let status;
@@ -28,13 +28,13 @@ export default function Board({ xIsNext, squares, onPlay }) {
         status = 'Next player: ' + (xIsNext ? 'X' : 'O');
     }
 
-
-
     return (
         <div className="w-500 h-500 flex flex-col items-center justify-center text-2xl">
-            <p className="mb-4">TicTacToe</p>
+            <p className="mb-4">Tic Tac Toe</p>
             <p>{status}</p>
-            {/* <button onClick={handleReset}>Reset</button> */}
+            <button className="cursor" onClick={handleResetClick}>
+                <BiReset size={25} color={"rgb(34,197,94)"} />
+            </button>
 
             <div className="flex mb-4">
                 <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
